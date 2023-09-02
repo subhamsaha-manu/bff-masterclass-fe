@@ -1,0 +1,53 @@
+name: main
+on: [ push, pull_request ]
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        node:
+          - '12'
+          - '14'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: install
+        run: npm ci
+
+      - name: generate
+        run: npm run generate:all
+
+      - name: Build sources
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: install
+        run: npm ci
+
+      - name: generate
+        run: npm run generate:all
+
+      - name: type check
+        run: npm run check-types
+
+      - name: Run lint
+        run: npm run lint
