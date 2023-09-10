@@ -1,37 +1,45 @@
 module.exports = {
-  // The root of your source code, typically /src
-
-  // `<rootDir>` is a token Jest substitutes
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.+)': '<rootDir>/src/$1',
+    '^@/assets/illustrations/(.+.svg)$': '<rootDir>/path/to/identity-obj-proxy',
   },
-
-  // Jest transformations -- this adds support for TypeScript
-
-  // using ts-jest
-
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.[jt]sx?$': 'ts-jest',
+    '^.+\\.png?$': '<rootDir>/src/tools/fileMock.js',
+    '^.+\\.svg$': '<rootDir>/src/tools/svgTransformer.js',
   },
-
-  // Runs special logic, such as cleaning up components
-
-  // when using React Testing Library and adds special
-
-  // extended assertions to Jest
-
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-
-  // Test spec file resolution pattern
-
-  // Matches parent folder `__tests__` and filename
-
-  // should contain `test` or `spec`.
-
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-
-  // Module file extensions for importing
-
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  collectCoverageFrom: [
+    'src/components/**/*.{js,jsx,ts,tsx}',
+    'src/features/**/*.{js,jsx,ts,tsx}',
+    'src/hooks/**/*.{js,jsx,ts,tsx}',
+    '!src/**/index.{ts,tsx}',
+    '!**/*.generated.tsx',
+    '!**/apis/*',
+    '!src/utils/**/*.stories.{js,jsx,ts,tsx}',
+    '!src/__tests__/**/*.{js,jsx,ts,tsx}',
+    '!**/node_modules/**',
+    '!dist/**',
+    '!/src/apollo/*',
+    '!/src/utils/*',
+    '!/src/tools/*',
+    '!/src/xhr',
+    '!/src/store/main',
+    '!/src/store/actions',
+    '!/src/store/reducers',
+    '!/src/config/getAppConfig.ts',
+  ],
+  coveragePathIgnorePatterns: [
+    '/src/apollo',
+    '/src/utils',
+    '/src/tools',
+    '/src/context',
+    '/src/xhr',
+    '/src/store/main',
+    '/src/store/actions',
+    '/src/store/reducers',
+  ],
 }

@@ -20,7 +20,7 @@ export const Coursework: FC = () => {
   }
 
   return (
-    <Wrap justify="space-between">
+    <Wrap justify="space-between" data-testid="activities-wrapper">
       {data?.activitiesInClass.map((activity) => {
         return (
           <WrapItem key={activity.uuid} m="8px !important">

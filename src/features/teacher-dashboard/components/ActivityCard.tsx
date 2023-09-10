@@ -18,6 +18,7 @@ export const ActivityCard: FC<ActivityCardProps> = ({
       w="300px"
       border="2px solid #ecedef"
       borderRadius="8px"
+      data-testid="activity-card"
     >
       <Flex display-name="activity-card-image" w="100%">
         <Image src={ActivitySVG} alt="activity" />
