@@ -22,7 +22,6 @@ export const ContentLayout: React.FC<ContentLayoutProps> = ({ children, pageTitl
         marginBottom: '12px',
         padding: '24px',
         height: '93vh',
-        overflowY: 'scroll',
       }}
     >
       {children}

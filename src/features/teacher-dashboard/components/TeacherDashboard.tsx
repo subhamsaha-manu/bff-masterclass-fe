@@ -1,0 +1,32 @@
+import { Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { FC } from 'react'
+
+import { Coursework } from './Coursework'
+
+import { ContentLayout } from '@/components/Layout'
+
+export const TeacherDashboard: FC = () => {
+  return (
+    <ContentLayout pageTitle="teacher-dashboard">
+      <Flex display-name="teacher-dashboard-heading" w="100%" align="center" p={1}>
+        <Heading fontWeight="700" fontSize={{ base: '20px', xl: '30px' }} color="font.heading">
+          Teacher Dashboard
+        </Heading>
+      </Flex>
+      <Flex display-name="teacher-tabs-container">
+        <Tabs isFitted variant="enclosed" w="100%">
+          <TabList>
+            <Tab _selected={{ color: 'white', bg: 'blue.500' }}>Coursework</Tab>
+            <Tab _selected={{ color: 'white', bg: 'blue.500' }}>Class Progress</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel p={0} pt={4}>
+              <Coursework />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Flex>
+    </ContentLayout>
+  )
+}

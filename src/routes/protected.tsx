@@ -7,6 +7,11 @@ import { CurrentUserConsumer } from '@/context/CurrentUserProvider'
 import { lazyImport } from '@/utils/lazyImport'
 
 const { Dashboard } = lazyImport(() => import('@/features/dashboard'), 'Dashboard')
+const { TeacherDashboard } = lazyImport(
+  () => import('@/features/teacher-dashboard'),
+  'TeacherDashboard'
+)
+
 const App = () => {
   return (
     <CurrentUserConsumer>
@@ -26,6 +31,7 @@ export const protectedRoutes = [
     element: <App />,
     children: [
       { path: '', element: <Dashboard /> },
+      { path: 'teacher-dashboard', element: <TeacherDashboard /> },
       { path: '*', element: <Navigate to="." /> },
     ],
   },
