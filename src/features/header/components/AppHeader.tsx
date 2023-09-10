@@ -19,7 +19,7 @@ import { IoMdLogOut } from 'react-icons/io'
 import { useNavigate } from 'react-router'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
-import { IS_AUTHENTICATED } from '@/utils/constants'
+import { IS_AUTHENTICATED, USER_TOKEN } from '@/utils/constants'
 import { storage } from '@/utils/storage'
 
 const Links = [{ name: 'Home', path: '/home' }]
@@ -49,6 +49,7 @@ export const AppHeader: FC = () => {
 
   const logoutUser = () => {
     storage.clearItem(IS_AUTHENTICATED)
+    storage.clearItem(USER_TOKEN)
     navigate('/')
   }
 
