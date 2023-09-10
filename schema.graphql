@@ -19,7 +19,6 @@ type User {
     uuid: ID!
     name: String!
     email: String!
-    mobileNumber: String
 }
 
 schema {

@@ -6,7 +6,6 @@ export const currentUser = gql`
       uuid
       name
       email
-      mobileNumber
     }
   }
 `
