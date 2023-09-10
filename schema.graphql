@@ -1,29 +1,11 @@
 type Query {
     login(input: LoginUserInput!): AuthPayload!
     currentUser: User
-    friends: [Friend!]!
-}
-
-type Mutation {
-    signup(input: SignupUserInput!): AuthPayload!
-    addModifyFriend(input: FriendInput!): AddFriendPayload!
-    updateUser(input: UpdateUserInput!): User
-}
-
-input SignupUserInput {
-    email: String!
-    password: String!
-    name: String!
-    mobileNumber: String
 }
 
 input LoginUserInput {
     email: String!
     password: String!
-}
-
-input UpdateUserInput{
-    mobileNumber: String!
 }
 
 type AuthPayload {
@@ -40,30 +22,6 @@ type User {
     mobileNumber: String
 }
 
-type Friend {
-    uuid: ID
-    name: String!
-    birthday: String!
-    email: String
-    mobileNumber: String
-    avatar: String!
-}
-
-input FriendInput {
-    uuid: ID
-    name: String!
-    birthday: String!
-    email: String
-    mobileNumber: String
-    avatar: String!
-}
-
-type AddFriendPayload {
-    code: Int!
-    message: String!
-}
-
 schema {
     query: Query
-    mutation: Mutation
 }

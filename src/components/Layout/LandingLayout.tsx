@@ -1,8 +1,7 @@
 import { Flex } from '@chakra-ui/layout'
 import React from 'react'
 
-import { Footer } from '@/features/Footer'
-import { LandingPageHeader } from '@/features/Header'
+import { LandingPageHeader } from '@/features/header'
 
 type LandingLayoutProps = {
   children: React.ReactNode
@@ -25,7 +24,6 @@ export const LandingLayout: React.FC<LandingLayoutProps> = ({
       >
         {children}
       </Flex>
-      <Footer />
     </>
   )
 }

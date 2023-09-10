@@ -1,8 +1,7 @@
-import { useLazyQuery } from '@apollo/client'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
-  Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -13,7 +12,6 @@ import {
   InputRightElement,
   Stack,
   Text,
-  useColorModeValue,
   useToast,
   VStack,
 } from '@chakra-ui/react'
@@ -24,12 +22,13 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import * as z from 'zod'
 
-import { LOGIN_USER } from './queries'
+import { useLoginLazyQuery } from '../apis/login.generated'
 
 import { SpinnerContainer } from '@/components/elements/Spinner'
-import { authContext, GraphQLErrorMessage } from '@/features/auth'
+import { GraphQLErrorMessage } from '@/features/common/GraphQLErrorMessage'
 import CurrentUserContext from '@/hooks/useCurrentUser'
 import { User } from '@/types'
+import { IS_AUTHENTICATED, USER_TOKEN } from '@/utils/constants'
 import { storage } from '@/utils/storage'
 
 const schema = z.object({
@@ -50,8 +49,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     resolver: zodResolver(schema),
   })
   const { setUser } = useContext(CurrentUserContext)
-  const { setAuthenticated } = useContext(authContext)
-  const [loginUser, { error }] = useLazyQuery(LOGIN_USER, {
+
+  const [loginUser, { error }] = useLoginLazyQuery({
     fetchPolicy: 'network-only',
     onCompleted: (data) => {
       const { token } = data.login
@@ -65,7 +64,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         })
         return null
       }
-      storage.setToken(data.login.token)
+      storage.setItem(USER_TOKEN, data.login.token)
+      storage.setItem(IS_AUTHENTICATED, true)
       toast({
         title: 'Login successful.',
         description: 'Welcome back.',
@@ -75,7 +75,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       })
 
       setUser({ user: {} as User, setUser: noop })
-      setAuthenticated(true)
+
       onSuccess()
     },
   })
@@ -105,11 +105,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   return (
     <>
       {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
-      <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
+      <Flex display-name="login-form-container" flexDir="column" gap={4} w="100%">
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)} data-testid="login-form">
             <VStack spacing={8} align="stretch">
-              <FormControl isInvalid={errors.email} isRequired>
+              <FormControl isInvalid={false} isRequired>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input
                   id="email"
@@ -124,7 +124,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 </FormErrorMessage>
                 <FormHelperText>We never share your email.</FormHelperText>
               </FormControl>
-              <FormControl isInvalid={errors.password} isRequired>
+              <FormControl isInvalid={false} isRequired>
                 <FormLabel htmlFor="password">Password</FormLabel>
                 <InputGroup size="md">
                   <Input
@@ -155,7 +155,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             </VStack>
           </form>
         </Stack>
-      </Box>
+      </Flex>
     </>
   )
 }

@@ -1,33 +1,29 @@
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
-import { Footer } from '@/features/Footer'
-import { AppHeader } from '@/features/Header'
-import { Sidebar } from '@/features/Sidebar'
+import { AppHeader } from '@/features/header'
+import { SetUserType } from '@/hooks/useCurrentUser'
+import { User } from '@/types'
 
 type MainLayoutProps = {
   children: React.ReactNode
-  context: any
+  context: { user: User; setUser: SetUserType }
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }: MainLayoutProps) => {
   return (
     <Flex display-name="main-layout-flex-container" direction="column">
-      <Sidebar>
+      <AppHeader />
+      <main>
         <Flex
-          p="5"
-          justify="flex-end"
-          bg="#0e1e25"
-          display-name="header-flex-container"
-          display={{ base: 'none', md: 'flex' }}
+          display-name="main-layout-children-flex-container"
+          h="93vh"
+          background="app.background"
+          justify="center"
         >
-          <Flex justify="center" display-name="header-flex-container-2">
-            <AppHeader />
-          </Flex>
+          {children}
         </Flex>
-        <main>{children}</main>
-        <Footer />
-      </Sidebar>
+      </main>
     </Flex>
   )
 }
