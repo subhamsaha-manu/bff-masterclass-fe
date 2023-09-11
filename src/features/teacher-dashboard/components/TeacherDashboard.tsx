@@ -1,12 +1,13 @@
 import { Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { FC } from 'react'
 
+import { ClassProgress } from './ClassProgress'
 import { Coursework } from './Coursework'
+
+import { useTeacherDashboardQuery } from '../apis/teacherDashboard.generated'
 
 import { SpinnerContainer } from '@/components/elements/Spinner'
 import { ContentLayout } from '@/components/Layout'
-import { useTeacherDashboardQuery } from '@/features/teacher-dashboard/apis/teacherDashboard.generated'
-import { ClassProgress } from '@/features/teacher-dashboard/components/ClassProgress'
 import { CLASS_ID } from '@/utils/constants'
 
 export const TeacherDashboard: FC = () => {

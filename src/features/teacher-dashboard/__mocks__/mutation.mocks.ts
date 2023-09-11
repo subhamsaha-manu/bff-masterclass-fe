@@ -1,8 +1,9 @@
-import { lockUnlockActivity } from '@/features/teacher-dashboard/apis/lockUnlockActivity'
+import { lockUnlockActivity } from '../apis/lockUnlockActivity'
 import {
   LockUnlockActivityMutation,
   LockUnlockActivityMutationVariables,
-} from '@/features/teacher-dashboard/apis/lockUnlockActivity.generated'
+} from '../apis/lockUnlockActivity.generated'
+
 import { createMutationMock } from '@/test/createMocks'
 import { ActivityStatus } from '@/types'
 import { ACTIVITY_ID_1, STUDENT_ID_1 } from '@/utils/constants'
