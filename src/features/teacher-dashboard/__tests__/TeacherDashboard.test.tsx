@@ -11,6 +11,10 @@ jest.mock('@/assets/illustrations/activity.svg', () => {
   return 'MockedSVGContent' // You can use any value you want for the mock
 })
 
+jest.mock('@/assets/illustrations/auth-modal-illustration.svg', () => {
+  return 'MockedSVGContent' // You can use any value you want for the mock
+})
+
 type RenderArgsType = {
   mocks?: ReturnType<typeof defaultMocks>
 }

@@ -1,22 +1,24 @@
-import { activitiesInClass } from '../apis/activitiesInClass'
+import { teacherDashboard } from '../apis/teacherDashboard'
 import {
-  ActivitiesInClassQuery,
-  ActivitiesInClassQueryVariables,
-} from '../apis/activitiesInClass.generated'
+  TeacherDashboardQuery,
+  TeacherDashboardQueryVariables,
+} from '../apis/teacherDashboard.generated'
 
 import { anActivity } from '@/factories/anActivity'
+import { aStudent } from '@/factories/aStudent'
 import { createOverridableMock } from '@/test/createMocks'
 import { CLASS_ID } from '@/utils/constants'
 
-export const activitiesInClassMock = createOverridableMock<
-  ActivitiesInClassQueryVariables,
-  ActivitiesInClassQuery
+export const teacherDashboardMock = createOverridableMock<
+  TeacherDashboardQueryVariables,
+  TeacherDashboardQuery
 >(
-  activitiesInClass,
+  teacherDashboard,
   {
     classId: CLASS_ID,
   },
   {
     activitiesInClass: [anActivity.build(), anActivity.build()],
+    students: [aStudent.build()],
   }
 )
