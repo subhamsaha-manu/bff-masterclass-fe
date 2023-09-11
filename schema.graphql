@@ -53,8 +53,8 @@ enum ActivityStatus {
 }
 
 input LockUnlockActivityInput {
-    studentUuid: ID!
-    activityUuid: ID!
+    studentId: ID!
+    activityId: ID!
     status: ActivityStatus!
 }
 

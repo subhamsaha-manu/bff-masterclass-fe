@@ -7,7 +7,8 @@ import {
 import { anActivity } from '@/factories/anActivity'
 import { aStudent } from '@/factories/aStudent'
 import { createOverridableMock } from '@/test/createMocks'
-import { CLASS_ID } from '@/utils/constants'
+import { ActivityStatus } from '@/types'
+import { ACTIVITY_ID_1, CLASS_ID, STUDENT_ID_1 } from '@/utils/constants'
 
 export const teacherDashboardMock = createOverridableMock<
   TeacherDashboardQueryVariables,
@@ -18,7 +19,22 @@ export const teacherDashboardMock = createOverridableMock<
     classId: CLASS_ID,
   },
   {
-    activitiesInClass: [anActivity.build(), anActivity.build()],
-    students: [aStudent.build()],
+    activitiesInClass: [
+      anActivity.build({
+        uuid: ACTIVITY_ID_1,
+      }),
+      anActivity.build(),
+    ],
+    students: [
+      aStudent.build({
+        uuid: STUDENT_ID_1,
+        activities: [
+          {
+            uuid: ACTIVITY_ID_1,
+            status: ActivityStatus.Unlocked,
+          },
+        ],
+      }),
+    ],
   }
 )

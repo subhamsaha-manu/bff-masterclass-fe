@@ -4,9 +4,10 @@ import { FC } from 'react'
 
 import { ActivityStatusIcon } from './ActivityStatusIcon'
 
+import { useLockUnlockActivityMutation } from '../apis/lockUnlockActivity.generated'
+import { teacherDashboard } from '../apis/teacherDashboard'
+
 import { SpinnerContainer } from '@/components/elements/Spinner'
-import { useLockUnlockActivityMutation } from '@/features/teacher-dashboard/apis/lockUnlockActivity.generated'
-import { teacherDashboard } from '@/features/teacher-dashboard/apis/teacherDashboard'
 import { Activity, ActivityStatus, Student } from '@/types'
 import { CLASS_ID } from '@/utils/constants'
 
@@ -59,13 +60,15 @@ export const ClassProgress: FC<ClassProgressProps> = ({ students, activities }) 
               <Td>{name}</Td>
               {activities.map((activity) => (
                 <Td
+                  data-testid={`activity-${activity.uuid}-${uuid}`}
                   key={activity.uuid}
+                  cursor={activity.status === ActivityStatus.Completed ? 'default' : 'pointer'}
                   onClick={() => {
                     lockUnlockActivity({
                       variables: {
                         lockUnlockActivityInput: {
-                          activityUuid: activity.uuid,
-                          studentUuid: uuid,
+                          activityId: activity.uuid,
+                          studentId: uuid,
                           status:
                             activity.status === ActivityStatus.Locked
                               ? ActivityStatus.Unlocked

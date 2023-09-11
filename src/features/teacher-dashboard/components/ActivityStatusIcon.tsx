@@ -13,9 +13,9 @@ export const ActivityStatusIcon: FC<ActivityStatusIconProps> = ({ status }) => {
     case ActivityStatus.Completed:
       return <FcCheckmark />
     case ActivityStatus.Locked:
-      return <FaLock cursor="pointer" />
+      return <FaLock />
     case ActivityStatus.Unlocked:
-      return <FaUnlockAlt cursor="pointer" />
+      return <FaUnlockAlt />
     default:
       return null
   }

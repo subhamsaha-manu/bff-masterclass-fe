@@ -31,7 +31,9 @@ export const TeacherDashboard: FC = () => {
         <Tabs isFitted variant="enclosed" w="100%">
           <TabList>
             <Tab _selected={{ color: 'white', bg: 'blue.500' }}>Coursework</Tab>
-            <Tab _selected={{ color: 'white', bg: 'blue.500' }}>Class Progress</Tab>
+            <Tab _selected={{ color: 'white', bg: 'blue.500' }} data-testid="class-progress-tab">
+              Class Progress
+            </Tab>
           </TabList>
 
           <TabPanels>
