@@ -3,25 +3,15 @@ import { FC } from 'react'
 
 import { ActivityCard } from './ActivityCard'
 
-import { useActivitiesInClassQuery } from '../apis/activitiesInClass.generated'
+import { Activity } from '@/types'
 
-import { SpinnerContainer } from '@/components/elements/Spinner'
-import { CLASS_ID } from '@/utils/constants'
-
-export const Coursework: FC = () => {
-  const { data, loading } = useActivitiesInClassQuery({
-    variables: {
-      classId: CLASS_ID,
-    },
-  })
-
-  if (loading && !data) {
-    return <SpinnerContainer />
-  }
-
+type CourseworkProps = {
+  readonly activitiesInClass: Array<Activity>
+}
+export const Coursework: FC<CourseworkProps> = ({ activitiesInClass }) => {
   return (
     <Wrap justify="space-between" data-testid="activities-wrapper">
-      {data?.activitiesInClass.map((activity) => {
+      {activitiesInClass.map((activity) => {
         return (
           <WrapItem key={activity.uuid} m="8px !important">
             <ActivityCard activity={activity} />

@@ -1,7 +1,9 @@
-import { activitiesInClassMock } from './query.mocks'
+import { lockUnlockActivityMock } from './mutation.mocks'
+import { teacherDashboardMock } from './query.mocks'
 
 import { createDefaultMocks } from '@/test/createMocks'
 
 export const defaultMocks = createDefaultMocks(() => ({
-  activitiesInClassMock: activitiesInClassMock(),
+  teacherDashboardMock: teacherDashboardMock(),
+  lockUnlockActivityMock: lockUnlockActivityMock,
 }))

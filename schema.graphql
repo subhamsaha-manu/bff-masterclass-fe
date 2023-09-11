@@ -2,6 +2,11 @@ type Query {
     login(input: LoginUserInput!): AuthPayload!
     currentUser: User
     activitiesInClass(classId: ID!): [Activity!]!
+    students: [Student!]!
+}
+
+type Mutation {
+    lockUnlockActivity(lockUnlockActivityInput: LockUnlockActivityInput!): Boolean!
 }
 
 input LoginUserInput {
@@ -30,6 +35,30 @@ type Activity {
     classId: String!
 }
 
+type StudentActivity {
+    uuid: ID!
+    status: ActivityStatus!
+}
+
+type Student {
+    uuid: ID!
+    name: String!
+    activities: [StudentActivity!]!
+}
+
+enum ActivityStatus {
+    COMPLETED
+    LOCKED
+    UNLOCKED
+}
+
+input LockUnlockActivityInput {
+    studentId: ID!
+    activityId: ID!
+    status: ActivityStatus!
+}
+
 schema {
     query: Query
+    mutation: Mutation
 }

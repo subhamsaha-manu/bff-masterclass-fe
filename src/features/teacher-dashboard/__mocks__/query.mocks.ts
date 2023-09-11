@@ -1,22 +1,40 @@
-import { activitiesInClass } from '../apis/activitiesInClass'
+import { teacherDashboard } from '../apis/teacherDashboard'
 import {
-  ActivitiesInClassQuery,
-  ActivitiesInClassQueryVariables,
-} from '../apis/activitiesInClass.generated'
+  TeacherDashboardQuery,
+  TeacherDashboardQueryVariables,
+} from '../apis/teacherDashboard.generated'
 
 import { anActivity } from '@/factories/anActivity'
+import { aStudent } from '@/factories/aStudent'
 import { createOverridableMock } from '@/test/createMocks'
-import { CLASS_ID } from '@/utils/constants'
+import { ActivityStatus } from '@/types'
+import { ACTIVITY_ID_1, CLASS_ID, STUDENT_ID_1 } from '@/utils/constants'
 
-export const activitiesInClassMock = createOverridableMock<
-  ActivitiesInClassQueryVariables,
-  ActivitiesInClassQuery
+export const teacherDashboardMock = createOverridableMock<
+  TeacherDashboardQueryVariables,
+  TeacherDashboardQuery
 >(
-  activitiesInClass,
+  teacherDashboard,
   {
     classId: CLASS_ID,
   },
   {
-    activitiesInClass: [anActivity.build(), anActivity.build()],
+    activitiesInClass: [
+      anActivity.build({
+        uuid: ACTIVITY_ID_1,
+      }),
+      anActivity.build(),
+    ],
+    students: [
+      aStudent.build({
+        uuid: STUDENT_ID_1,
+        activities: [
+          {
+            uuid: ACTIVITY_ID_1,
+            status: ActivityStatus.Unlocked,
+          },
+        ],
+      }),
+    ],
   }
 )
