@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 
 import './index.css'
 import { App } from './App'
+import { initMocks } from './test/server'
+
+initMocks()
 
 ReactDOM.render(
   <React.StrictMode>

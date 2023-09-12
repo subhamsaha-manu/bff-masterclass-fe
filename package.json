@@ -39,6 +39,7 @@
   },
   "scripts": {
     "start": "HTTPS=true craco start",
+    "serve:local": "REACT_APP_API_MOCKING=true craco start",
     "build": "craco build",
     "test": "jest",
     "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
@@ -75,7 +76,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
     "@babel/preset-env": "^7.15.8",
+    "@babel/preset-modules": "^0.1.6",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.16.0",
     "@commitlint/cli": "^16.0.2",
