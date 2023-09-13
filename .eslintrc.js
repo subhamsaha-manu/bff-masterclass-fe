@@ -6,10 +6,7 @@ module.exports = {
     jest: true,
     browser: true,
   },
-  parserOptions: {
-    ecmaVersion: 8,
-    sourceType: 'module',
-  },
+  parserOptions: { ecmaVersion: 8, sourceType: 'module' },
   ignorePatterns: [
     'node_modules/*',
     '**/*.generated.tsx',
@@ -25,15 +22,13 @@ module.exports = {
     '@typescript-eslint',
     'react-hooks',
   ],
-  extends: ['eslint:recommended', 'plugin:storybook/recommended'],
+  extends: ['eslint:recommended'],
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
       parser: '@typescript-eslint/parser',
       settings: {
-        react: {
-          version: 'detect',
-        },
+        react: { version: 'detect' },
         'import/resolver': {
           typescript: {},
         },
@@ -60,40 +55,39 @@ module.exports = {
         'no-restricted-imports': [
           'error',
           {
-            patterns: ['@/features/*/*/*'],
+            name: '@alefeducation/ui-elements-library-core/',
+            message:
+              'Please use Eg: "import { Heading } from \'@alefeducation/ui-elements-library-core/lib/Heading\'" instead.',
           },
         ],
         'linebreak-style': ['error', 'unix'],
         'react/prop-types': 'off',
+
         'import/order': [
           'error',
           {
             groups: ['builtin', 'external', 'index', 'sibling', 'parent', 'internal'],
             'newlines-between': 'always',
-            alphabetize: {
-              order: 'asc',
-              caseInsensitive: true,
-            },
+            alphabetize: { order: 'asc', caseInsensitive: true },
           },
         ],
         'import/default': 'off',
         'import/no-named-as-default-member': 'off',
         'import/no-named-as-default': 'off',
+
         'react/react-in-jsx-scope': 'off',
+
         'jsx-a11y/anchor-is-valid': 'off',
-        '@typescript-eslint/no-unused-vars': ['error'],
+
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-function-return-type': ['off'],
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
         '@typescript-eslint/no-empty-function': ['off'],
         '@typescript-eslint/no-explicit-any': ['off'],
-        '@typescript-eslint/no-non-null-assertion': 'off',
-        'prettier/prettier': [
-          'error',
-          {},
-          {
-            usePrettierrc: true,
-          },
-        ],
+
+        'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+        'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
       },
     },
     {
@@ -118,7 +112,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/types.ts'],
+      files: ['src/types.ts', 'src/types/app/index.d.ts'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         camelcase: 'off',
