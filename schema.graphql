@@ -1,6 +1,7 @@
 type Query {
     login(input: LoginUserInput!): AuthPayload!
     currentUser: User
+    activitiesInClass(classId: ID!): [Activity!]!
 }
 
 input LoginUserInput {
@@ -19,6 +20,14 @@ type User {
     uuid: ID!
     name: String!
     email: String!
+}
+
+type Activity {
+    uuid: ID!
+    name: String!
+    description: String!
+    completionPercentage: Int!
+    classId: ID!
 }
 
 schema {

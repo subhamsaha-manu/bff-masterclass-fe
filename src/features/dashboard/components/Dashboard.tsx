@@ -1,11 +1,14 @@
 import { Flex, Heading, Image } from '@chakra-ui/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import StudentSVG from '@/assets/illustrations/student.svg'
 import TeacherSVG from '@/assets/illustrations/teacher.svg'
 import { ContentLayout } from '@/components/Layout/ContentLayout'
 
 export const Dashboard = () => {
+  const navigate = useNavigate()
+
   return (
     <ContentLayout pageTitle="dashboard">
       <Flex gap={8} flexDir="column" h="100%">
@@ -21,6 +24,7 @@ export const Dashboard = () => {
               boxShadow="0 8px 8px -4px lightblue"
               cursor="pointer"
               _hover={{ background: '#efe' }}
+              onClick={() => navigate('/app/activities')}
             >
               <Image src={TeacherSVG} alt="teacher" />
             </Flex>
